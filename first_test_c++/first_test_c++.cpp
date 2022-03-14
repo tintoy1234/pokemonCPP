@@ -4,11 +4,30 @@
 #include <iostream>
 
 using namespace std;
+void damage(int health)
+{
+	health -= 2;
+}
+void damagereference(int& health) 
+{
+	health -= 2;
+}
+void damagepointedobject(int* health)
+{
+	*health -= 3;
+}
 int main()
 {
-    cout << "Hello World!"<<endl;
-    string answer;
-    cin >> answer;
+	cout << "Hello World!\n";
+	int life = 10;
+	cout << "the value " << life << " is stored at memory adress : " << &life << endl;
+	damage(life);
+	cout << life << endl;
+	damagereference(life);
+	cout << life << endl;
+	damagepointedobject(&life);
+	cout << life << endl;
+
 }
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage
