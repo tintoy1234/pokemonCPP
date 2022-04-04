@@ -2,41 +2,106 @@
 //
 
 #include <iostream>
+#include <vector>
+#include "Pokemon.h"
 
 using namespace std;
-void damage(int health)
-{
-	health -= 2;
+
+void Damage(int health) {
+    health -= 2;
 }
-void damagereference(int& health) 
-{
-	health -= 2;
+
+void DamageReference(int& health) {
+    health -= 2;
 }
-void damagepointedobject(int* health)
-{
-	*health -= 3;
+
+void DamagePointedObject(int* health) {
+    *health -= 3;
 }
+
+void ShowMultiDimensionalMap()
+{
+    int tileMap[5][8]{ {4, 0, 0, 1, 1, 0, 3, 0},
+                        {0, 0, 1, 1, 1, 1, 1, 0},
+                        {0, 2, 1, 0, 1, 1, 1, 1},
+                        {3, 1, 1, 1, 1, 2, 1, 0},
+                        {0, 3, 0, 1, 1, 1, 2, 0} };
+
+    for (int x = 0; x < 5; x++) {
+        for (int y = 0; y < 8; y++) {
+            int tile = tileMap[x][y];
+            switch (tile)
+            {
+            case 0:
+                cout << " X ";
+                break;
+            case 1:
+                cout << " ~ ";
+                break;
+            case 2:
+                cout << " O ";
+                break;
+            case 3:
+                cout << " V ";
+                break;
+            default:
+                cout << " ^ ";
+                break;
+            }
+        }
+        cout << endl;
+    }
+
+}
+
+void ShowVector()
+{
+    vector<float> grades(20, 10);
+    grades[5] = 12;
+    grades[18] = 7;
+    for (int i = 0; i < grades.size(); i++)
+    {
+        cout << grades[i] << " ; ";
+    }
+    cout << endl;
+    grades.push_back(15);
+    grades.push_back(12);
+    grades.push_back(17);
+    grades.pop_back();
+    for (int i = 0; i < grades.size(); i++)
+    {
+        cout << grades[i] << " ; ";
+    }
+}
+
+string GetLifeText(int life)
+{
+    return life > 5 ? "alive" : "dying";
+}
+
+
 int main()
 {
-	cout << "Hello World!\n";
-	int life = 10;
-	cout << "the value " << life << " is stored at memory adress : " << &life << endl;
-	damage(life);
-	cout << life << endl;
-	damagereference(life);
-	cout << life << endl;
-	damagepointedobject(&life);
-	cout << life << endl;
+    cout << "Hello World!\n";
+    int life = 10;
+    cout << "The value " << life << " is stored at memory adress : " << &life << endl;
+    Damage(life);
+    cout << life << endl;
+    DamageReference(life);
+    cout << life << endl;
+    DamagePointedObject(&life);
+    cout << life << endl;
+    //if life > 5 show "Alive" else show "Dying"
+    cout << "Player is " << GetLifeText(life) << endl;
 
+    ShowMultiDimensionalMap();
+    //ShowVector();
+    cout << "============PIKACHU=============\n";
+    Pokemon pikachu = Pokemon("Pikachu", "a yellow electric mouse", 20);
+    pikachu.DisplaySumUp();
+    cout << "=========================\n";
+    pikachu.mPetName = "Pika Pika";
+    pikachu.Hurt(6);
+    pikachu.Heal(12);
+    pikachu.DisplaySumUp();
 }
-
-// Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage
-// Déboguer le programme : F5 ou menu Déboguer > Démarrer le débogage
-
-// Astuces pour bien démarrer : 
-//   1. Utilisez la fenêtre Explorateur de solutions pour ajouter des fichiers et les gérer.
-//   2. Utilisez la fenêtre Team Explorer pour vous connecter au contrôle de code source.
-//   3. Utilisez la fenêtre Sortie pour voir la sortie de la génération et d'autres messages.
-//   4. Utilisez la fenêtre Liste d'erreurs pour voir les erreurs.
-//   5. Accédez à Projet > Ajouter un nouvel élément pour créer des fichiers de code, ou à Projet > Ajouter un élément existant pour ajouter des fichiers de code existants au projet.
-//   6. Pour rouvrir ce projet plus tard, accédez à Fichier > Ouvrir > Projet et sélectionnez le fichier .sln.
